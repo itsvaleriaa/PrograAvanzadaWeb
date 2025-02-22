@@ -1,13 +1,15 @@
-﻿namespace Abstractions.Models
+﻿using System.ComponentModel;
+
+namespace Abstractions.Models
 {
     public class Categories
     {
         public int Id { get; set; }
-        public string? Name { get; set; }
+        [DisplayName("Nombre de la categoria")] public string? Name { get; set; }
     }
 
     public class CategoriesRequest
     {
-        public string Name { get; set; }
+        [DisplayName("Nombre de la categoria")] public string Name { get; set; }
     }
 }

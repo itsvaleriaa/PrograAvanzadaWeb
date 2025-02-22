@@ -57,13 +57,13 @@ namespace Web.Controllers
             return View(categories);
         }
 
-        public IActionResult Create()
+        public IActionResult Crear()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoriesRequest category)
+        public async Task<IActionResult> Crear(CategoriesRequest category)
         {
             if (!ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int Id)
+        public async Task<IActionResult> Editar(int Id)
         {
             string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerCategoria");
             var handler = new HttpClientHandler
@@ -140,7 +140,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Categories category)
+        public async Task<IActionResult> Editar(Categories category)
         {
             if (!ModelState.IsValid)
             {
@@ -176,7 +176,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Eliminar(int Id)
         {
             string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "EliminarCategorias");
             var handler = new HttpClientHandler
