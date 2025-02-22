@@ -1,0 +1,42 @@
+﻿@using Abstractions.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model People
+}
+
+
+<h1>Editar persona</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <div>
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.FirstLastName)
+        @Html.TextBoxFor(model => model.FirstLastName, new { @class = "form-control" })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.City)
+        @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.Address)
+        @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+    </div>
+    <div>
+        @Html.LabelFor(model => model.PhoneNumber)
+        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+    </div>
+    <br />
+    <input type="submit" value="Editar" />
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

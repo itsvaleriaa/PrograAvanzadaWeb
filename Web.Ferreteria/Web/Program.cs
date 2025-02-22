@@ -32,10 +32,17 @@ app.MapControllerRoute(
     pattern: "Privacidad",
     defaults: new { controller = "Home", action = "Privacy" });
 
+
 app.MapControllerRoute(
     name: "Categorias",
-    pattern: "Categorias",
-    defaults: new { controller = "Categories", action = "Index" });
+    pattern: "Categorias/{action=Index}/{id?}",
+    defaults: new { controller = "Categories" });
+
+app.MapControllerRoute(
+    name: "Personas",
+    pattern: "Personas/{action=Index}/{id?}",
+    defaults: new { controller = "People" });
+
 
 app.MapControllerRoute(
     name: "default",

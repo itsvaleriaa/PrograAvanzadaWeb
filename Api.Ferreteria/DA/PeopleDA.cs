@@ -67,6 +67,7 @@ namespace DA
             var result = await _sqlConnection.ExecuteScalarAsync<int>(sql,
                 new
                 {
+                    Id=people.Id,
                     Name = people.Name,
                     FirstLastName = people.FirstLastName,
                     City = people.City,
