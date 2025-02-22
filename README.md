@@ -1,7 +1,7 @@
 # PrograAvanzadaWeb
 
-Api project using Asp .Net Core 8.
+Api project using C# Asp .Net Core 8 using SOLID principles and clean architecture.
 
-Web project with the same framework. MVC.
+Web project with the same framework (Asp .Net Core) using MVC.
 
 Database: SQL Server.
