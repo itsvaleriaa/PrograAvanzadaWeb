@@ -1,0 +1,25 @@
+﻿@using Abstractions.Models
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model Categories
+}
+
+
+<h1>Crear categoria</h1>
+
+@using (Html.BeginForm())
+{
+    <idv>
+        @Html.LabelFor(model => model.Name)
+        @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+    </idv>
+    <br />
+    <input type="submit" value="Crear" />
+}
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

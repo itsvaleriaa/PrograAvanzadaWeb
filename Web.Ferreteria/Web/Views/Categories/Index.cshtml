@@ -8,7 +8,7 @@
 }
 
 <h1>Categorias</h1>
-
+<a class="btn btn-success" asp-action="Create" asp-controller="Categories"> Crear</a>
 <table class="table table-striped table-hover table-responsive">
     <thead>
         <tr>
@@ -34,16 +34,45 @@
         {
             @foreach (Categories category in Model)
             {
-                <tr class="align-middle">
+                <tr>
                     <td>
                         @Html.DisplayFor(modelo => category.Id)
                     </td>
                     <td>
                         @Html.DisplayFor(modelo => category.Name)
                     </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@category.Id" asp-controller="Categories" class="btn btn-info">Editar</a>
+                    </td>
+                    <form id="deleteForm-@category.Id" asp-controller="Categories" asp-action="Delete" asp-route-id="@category.Id" method="post" onsubmit="confirmDelete(event, '@category.Id')">
+                    <td>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
+                    </td>
+                    </form>
                 </tr>
             }
         }
     </tbody>
-
 </table>
+
+@section Scripts
+{
+    <script>
+        function confirmDelete(e, Id) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro que quieres eliminar esta categoria?',
+                icon: 'question',
+                showCancelButton: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, obtenemos el formulario y lo enviamos
+                    const formId = 'deleteForm-' + Id;
+                    const deleteForm = document.getElementById(formId);
+                    deleteForm.submit();
+                }
+            });
+        }
+    </script>
+}
