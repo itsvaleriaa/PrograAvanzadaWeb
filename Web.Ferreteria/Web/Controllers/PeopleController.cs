@@ -57,13 +57,13 @@ namespace Web.Controllers
             return View(people);
         }
 
-        public IActionResult Create()
+        public IActionResult Crear()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(PeopleRequest person)
+        public async Task<IActionResult> Crear(PeopleRequest person)
         {
             person.CreatedAt = DateTime.Now;
             if (!ModelState.IsValid)
@@ -100,7 +100,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(int Id)
+        public async Task<IActionResult> Editar(int Id)
         {
             string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerPersona");
             var handler = new HttpClientHandler
@@ -141,7 +141,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(People person)
+        public async Task<IActionResult> Editar(People person)
         {
             if (!ModelState.IsValid)
             {
@@ -177,7 +177,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(int Id)
+        public async Task<IActionResult> Eliminar(int Id)
         {
             string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "EliminarPersonas");
             var handler = new HttpClientHandler
