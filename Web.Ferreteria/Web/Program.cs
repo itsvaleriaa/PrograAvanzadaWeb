@@ -1,7 +1,13 @@
+using Abstractions.BC;
+using BC;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// injección de servicios
+builder.Services.AddScoped<IConfiguracion, Configuracion>();
 
 var app = builder.Build();
 
@@ -19,6 +25,17 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Custom name routes
+app.MapControllerRoute(
+    name: "Privacidad",
+    pattern: "Privacidad",
+    defaults: new { controller = "Home", action = "Privacy" });
+
+app.MapControllerRoute(
+    name: "Categorias",
+    pattern: "Categorias",
+    defaults: new { controller = "Categories", action = "Index" });
 
 app.MapControllerRoute(
     name: "default",
