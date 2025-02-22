@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Add_People
+﻿CREATE PROCEDURE [dbo].[Add_People]
     @Name VARCHAR(100),
     @FirstLastName VARCHAR(100),
     @City VARCHAR(100),
@@ -12,8 +12,8 @@ BEGIN
     BEGIN TRY
         BEGIN TRANSACTION;
 
-        INSERT INTO People (Name, City, Address, PhoneNumber, created_at)
-        VALUES (@Name, @City, @Address, @PhoneNumber, @Created_At);
+        INSERT INTO People (Name, FirstLastName, City, Address, PhoneNumber, created_at)
+        VALUES (@Name, @FirstLastName, @City, @Address, @PhoneNumber, @Created_At);
         COMMIT TRANSACTION;
 		SELECT SCOPE_IDENTITY() AS Id;
     END TRY
