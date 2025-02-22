@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE Get_People_By_Id
+﻿CREATE PROCEDURE [dbo].[Get_People_By_Id]
     @Id int
 AS
 BEGIN
@@ -6,6 +6,7 @@ BEGIN
         SELECT 
             Id, 
             Name, 
+			FirstLastName,
             City, 
             Address, 
             PhoneNumber, 
