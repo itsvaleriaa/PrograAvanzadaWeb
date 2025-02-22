@@ -22,7 +22,7 @@ namespace Api.Controllers
             try
             {
                 var result = await _peopleBW.Add(people);
-                return CreatedAtAction(nameof(Get), new { Id = result }, null);
+                return CreatedAtAction(nameof(Get), null, null);
             }
             catch (ApplicationException ex)
             {

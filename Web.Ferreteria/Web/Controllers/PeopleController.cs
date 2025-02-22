@@ -5,20 +5,20 @@ using System.Text.Json;
 
 namespace Web.Controllers
 {
-    public class CategoriesController : Controller
+    public class PeopleController : Controller
     {
         private IConfiguracion _configuracion;
-        private IList<Categories> categories { get; set; } = default!;
-        private Categories category { get; set; }
+        private IList<People> people { get; set; } = default!;
+        private People person { get; set; }
 
-        public CategoriesController(IConfiguracion configuracion)
+        public PeopleController(IConfiguracion configuracion)
         {
             _configuracion = configuracion;
         }
 
         public async Task<IActionResult> Index()
         {
-            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerCategorias");
+            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerPersonas");
             var handler = new HttpClientHandler
             {
                 // Acepta cualquier certificado (solo en desarrollo)
@@ -38,7 +38,7 @@ namespace Web.Controllers
                     try
                     {
                         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                        categories = JsonSerializer.Deserialize<List<Categories>>(requestResult, options);
+                        people = JsonSerializer.Deserialize<List<People>>(requestResult, options);
                     }
                     catch (JsonException jsonEx)
                     {
@@ -54,7 +54,7 @@ namespace Web.Controllers
             {
                 Console.WriteLine($"Se produjo un error inesperado: {ex.Message}");
             }
-            return View(categories);
+            return View(people);
         }
 
         public IActionResult Create()
@@ -63,14 +63,15 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CategoriesRequest category)
+        public async Task<IActionResult> Create(PeopleRequest person)
         {
+            person.CreatedAt = DateTime.Now;
             if (!ModelState.IsValid)
             {
-                return View(category);
+                return View(person);
             }
 
-            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "AgregarCategorias");
+            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "CrearPersonas");
             var handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
@@ -78,30 +79,30 @@ namespace Web.Controllers
             var client = new HttpClient(handler);
             try
             {
-                var result = await client.PostAsJsonAsync(endpoint, category);
+                var result = await client.PostAsJsonAsync(endpoint, person);
                 result.EnsureSuccessStatusCode();
-                if (result.StatusCode == System.Net.HttpStatusCode.OK)
+                if (result.StatusCode == System.Net.HttpStatusCode.Created)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "People");
                 }
             }
             catch (HttpRequestException httpEx)
             {
                 Console.WriteLine($"Error en la request HTTP: {httpEx.Message}");
-                return View(category);
+                return View(person);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Se produjo un error inesperado: {ex.Message}");
-                return View(category);
+                return View(person);
             }
-            return View(category);
+            return View(person);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int Id)
         {
-            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerCategoria");
+            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerPersona");
             var handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
@@ -120,7 +121,7 @@ namespace Web.Controllers
                     try
                     {
                         var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                        category = JsonSerializer.Deserialize<Categories>(requestResult, options);
+                        person = JsonSerializer.Deserialize<People>(requestResult, options);
                     }
                     catch (JsonException jsonEx)
                     {
@@ -136,18 +137,18 @@ namespace Web.Controllers
             {
                 Console.WriteLine($"Se produjo un error inesperado: {ex.Message}");
             }
-            return View(category);
+            return View(person);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(Categories category)
+        public async Task<IActionResult> Edit(People person)
         {
             if (!ModelState.IsValid)
             {
-                return View(category);
+                return View(person);
             }
 
-            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "EditarCategorias");
+            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "EditarPersonas");
             var handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
@@ -155,30 +156,30 @@ namespace Web.Controllers
             var client = new HttpClient(handler);
             try
             {
-                var result = await client.PutAsJsonAsync(endpoint, category);
+                var result = await client.PutAsJsonAsync(endpoint, person);
                 result.EnsureSuccessStatusCode();
                 if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Index", "People");
                 }
             }
             catch (HttpRequestException httpEx)
             {
                 Console.WriteLine($"Error en la request HTTP: {httpEx.Message}");
-                return View(category);
+                return View(person);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Se produjo un error inesperado: {ex.Message}");
-                return View(category);
+                return View(person);
             }
-            return View(category);
+            return View(person);
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(int Id)
         {
-            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "EliminarCategorias");
+            string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "EliminarPersonas");
             var handler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => true
@@ -192,7 +193,7 @@ namespace Web.Controllers
 
                 if (result.StatusCode == System.Net.HttpStatusCode.NoContent)
                 {
-                    return RedirectToAction("Index", "Categories");
+                    return RedirectToAction("Index", "People");
                 }
             }
             catch (HttpRequestException httpEx)
@@ -203,7 +204,7 @@ namespace Web.Controllers
             {
                 Console.WriteLine($"Se produjo un error inesperado: {ex.Message}");
             }
-            return RedirectToAction("Index", "Categories");
+            return RedirectToAction("Index", "People");
         }
     }
 }
