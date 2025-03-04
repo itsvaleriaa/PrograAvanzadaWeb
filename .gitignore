@@ -398,12 +398,3 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/Seguridad.Ferreteria/Abstractions/Abstractions.sln
-/Seguridad.Ferreteria/Abstractions/Abstractions.sln
-/Seguridad.Ferreteria/API/API.sln
-/Seguridad.Ferreteria/Abstractions/Abstractions.csproj
-/Seguridad.Ferreteria/API/API.csproj
-/Seguridad.Ferreteria/BC/BC.csproj
-/Seguridad.Ferreteria/BW/BW.csproj
-/Seguridad.Ferreteria/DA/DA.csproj
-/Seguridad.Ferreteria/API/API.sln
