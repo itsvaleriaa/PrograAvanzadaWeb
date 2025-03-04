@@ -1,0 +1,78 @@
+﻿@using Abstractions.Models
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    @model IList<Categories>
+}
+
+<h1>Categorias</h1>
+<a class="btn btn-success" asp-action="Crear" asp-controller="Categories"> Crear</a>
+<table class="table table-striped table-hover table-responsive">
+    <thead>
+        <tr>
+            <th>
+                #
+            </th>
+            <th>
+                Tipo
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || !Model.Any())
+        {
+            <tr>
+                <td colspan="2" class="text-center">No hay categorías disponibles</td>
+            </tr>
+        }
+        else
+        {
+            @foreach (Categories category in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelo => category.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelo => category.Name)
+                    </td>
+                    <td>
+                        <a asp-action="Editar" asp-route-id="@category.Id" asp-controller="Categories" class="btn btn-info">Editar</a>
+                    </td>
+                    <form id="deleteForm-@category.Id" asp-controller="Categories" asp-action="Eliminar" asp-route-id="@category.Id" method="post" onsubmit="confirmDelete(event, '@category.Id')">
+                    <td>
+                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
+                    </td>
+                    </form>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@section Scripts
+{
+    <script>
+        function confirmDelete(e, Id) {
+            e.preventDefault();
+
+            Swal.fire({
+                title: '¿Estás seguro que quieres eliminar esta categoria? Esta acción no se puede deshacer.',
+                icon: 'question',
+                showCancelButton: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    // Si el usuario confirma, obtenemos el formulario y lo enviamos
+                    const formId = 'deleteForm-' + Id;
+                    const deleteForm = document.getElementById(formId);
+                    deleteForm.submit();
+                }
+            });
+        }
+    </script>
+}

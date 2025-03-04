@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>DataBase</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{a5a53da9-acee-47aa-bcdf-02fb74235ce8}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql160DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>DataBase</RootNamespace>
+    <AssemblyName>DataBase</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="dbo\Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\People.sql" />
+    <Build Include="Tables\Roles.sql" />
+    <Build Include="Tables\Users.sql" />
+    <Build Include="Tables\UsersRoles.sql" />
+    <Build Include="Tables\Services.sql" />
+    <Build Include="Tables\Carts.sql" />
+    <Build Include="Tables\CartsxServices.sql" />
+    <Build Include="Tables\Categories.sql" />
+    <Build Include="Tables\ProductsCategories.sql" />
+    <Build Include="Tables\Products.sql" />
+    <Build Include="Tables\CartsxProducts.sql" />
+    <Build Include="Tables\Suppliers.sql" />
+    <Build Include="Tables\Inventories.sql" />
+    <Build Include="dbo\Views\Get_Suppliers_View.sql" />
+    <Build Include="dbo\Views\Get_Categories_View.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Suppliers.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Categories.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Supplier_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Category_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Suppliers.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Categories.sql" />
+    <Build Include="dbo\Stored Procedures\Add_Suppliers.sql" />
+    <Build Include="dbo\Stored Procedures\Add_Categories.sql" />
+    <Build Include="dbo\Stored Procedures\Add_Services.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Services.sql" />
+    <Build Include="dbo\Views\Get_Services_View.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Service_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Services.sql" />
+    <Build Include="dbo\Stored Procedures\Add_Products.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Products.sql" />
+    <Build Include="dbo\Views\Get_Products_View.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Product_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Products.sql" />
+    <Build Include="dbo\Stored Procedures\Add_ProductsCategories.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_ProductsCategories.sql" />
+    <Build Include="dbo\Views\Get_ProductsCategories_View.sql" />
+    <Build Include="dbo\Stored Procedures\Add_People.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_People.sql" />
+    <Build Include="dbo\Views\Get_People_View.sql" />
+    <Build Include="dbo\Stored Procedures\Get_People_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Update_People.sql" />
+    <Build Include="dbo\Stored Procedures\Add_Inventories.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Inventories.sql" />
+    <Build Include="dbo\Views\Get_Inventories_View.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Inventory_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Inventories.sql" />
+    <Build Include="dbo\Stored Procedures\Add_CartsxProducts.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_CartsxProducts.sql" />
+    <Build Include="dbo\Stored Procedures\Get_CartsxProducts_By_IdCart.sql" />
+    <Build Include="dbo\Views\Get_CartsxProducts_View.sql" />
+    <Build Include="dbo\Stored Procedures\Update_CartsxProducts.sql" />
+    <Build Include="dbo\Stored Procedures\Add_CartService.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_CartService.sql" />
+    <Build Include="dbo\Views\Get_CartService_View.sql" />
+    <Build Include="dbo\Stored Procedures\Get_CartService_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Update_CartService.sql" />
+    <Build Include="dbo\Stored Procedures\Add_Carts.sql" />
+    <Build Include="dbo\Stored Procedures\Delete_Carts.sql" />
+    <Build Include="dbo\Views\Get_Carts_View.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Cart_By_Id.sql" />
+    <Build Include="dbo\Stored Procedures\Update_Carts.sql" />
+    <Build Include="dbo\Stored Procedures\Get_User.sql" />
+    <Build Include="dbo\Stored Procedures\Add_User.sql" />
+    <Build Include="dbo\Stored Procedures\Get_Users_By_Roles.sql" />
+    <Build Include="dbo\Stored Procedures\Update_User.sql" />
+    <Build Include="dbo\Stored Procedures\Update_User_Password.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="DataBase.refactorlog" />
+  </ItemGroup>
+</Project>
