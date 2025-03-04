@@ -1,0 +1,19 @@
+﻿CREATE PROCEDURE Delete_CartsxProducts
+    @IdCart UNIQUEIDENTIFIER OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        DELETE CartsxProducts
+        WHERE IdCart=@IdCart;
+		SELECT @IdCart;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+
+        THROW;
+    END CATCH
+END

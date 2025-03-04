@@ -1,0 +1,19 @@
+﻿CREATE PROCEDURE Delete_People
+    @Id int OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    BEGIN TRANSACTION;
+    BEGIN TRY
+        DELETE People
+        WHERE Id=@Id;
+		SELECT @Id;
+        COMMIT TRANSACTION;
+    END TRY
+    BEGIN CATCH
+        ROLLBACK TRANSACTION;
+
+        THROW;
+    END CATCH
+END
