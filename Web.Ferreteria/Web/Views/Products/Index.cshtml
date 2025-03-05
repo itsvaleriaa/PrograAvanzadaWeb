@@ -12,23 +12,13 @@
     <thead>
         <tr>
             <th>
-                #
+                Nombre
             </th>
             <th>
-                Nombre Completo
-            </th>
-            <th></th>
-            <th>
-                Ciudad
+                Precio
             </th>
             <th>
-                Dirección
-            </th>
-            <th>
-                Número de Teléfono
-            </th>
-            <th>
-                Fecha de creación
+                Foto
             </th>
             <th>
                 Acciones
@@ -39,7 +29,7 @@
         @if (Model == null || !Model.Any())
         {
             <tr>
-                <td colspan="2" class="text-center">No hay personas para mostrar.</td>
+                <td colspan="2" class="text-center">No hay productos para mostrar.</td>
             </tr>
         }
         else
@@ -48,28 +38,25 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelo => person.Id)
+                        @Html.DisplayFor(modelo => products.Name)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelo => person.Name)
-                        @Html.DisplayFor(modelo => person.FirstLastName)
+                        @Html.DisplayFor(modelo => products.Price)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelo => person.City)
+                        @if (products.Photo == null)
+                        {
+                            <p>Sin foto.</p>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelo => products.Photo)
+                        }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelo => person.Address)
+                        <a asp-action="Editar" asp-route-id="@products.Id" asp-controller="Products" class="btn btn-info">Editar</a>
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelo => person.PhoneNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelo => person.CreatedAt)
-                    </td>
-                    <td>
-                        <a asp-action="Editar" asp-route-id="@person.Id" asp-controller="People" class="btn btn-info">Editar</a>
-                    </td>
-                    <form id="deleteForm-@person.Id" asp-controller="People" asp-action="Eliminar" asp-route-id="@person.Id" method="post" onsubmit="confirmDelete(event, '@person.Id')">
+                    <form id="deleteForm-@products.Id" asp-controller="Products" asp-action="Eliminar" asp-route-id="@products.Id" method="post" onsubmit="confirmDelete(event, '@products.Id')">
                     <td>
                         <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar</button>
                     </td>

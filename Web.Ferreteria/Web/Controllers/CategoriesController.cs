@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "1")]
     public class CategoriesController : Controller
     {
         private IConfiguracion _configuracion;
