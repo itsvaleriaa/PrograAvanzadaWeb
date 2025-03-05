@@ -1,10 +1,12 @@
 ﻿using Abstractions.BC;
 using Abstractions.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "1")]
     public class PeopleController : Controller
     {
         private IConfiguracion _configuracion;
@@ -26,16 +28,10 @@ namespace Web.Controllers
             };
             var client = new HttpClient(handler);
             var request = new HttpRequestMessage(HttpMethod.Get, endpoint);
-            //client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", HttpContext.User.Claims.Where(c => c.Type == "Token").FirstOrDefault().Value);
             var tokenClaim = HttpContext.User.Claims.FirstOrDefault(c => c.Type == "Token");
             if (tokenClaim != null)
             {
                 client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenClaim.Value);
-            }
-            else
-            {
-                Console.WriteLine("⚠️ Token no encontrado en los claims del usuario.");
-                // O podrías manejar el error de otra forma
             }
             var result = await client.SendAsync(request);
             try
