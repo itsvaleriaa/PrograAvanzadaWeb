@@ -1,10 +1,12 @@
 ﻿using Abstractions.BC;
 using Abstractions.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
 
 namespace Web.Controllers
 {
+    [Authorize(Roles = "1")]
     public class PeopleController : Controller
     {
         private IConfiguracion _configuracion;

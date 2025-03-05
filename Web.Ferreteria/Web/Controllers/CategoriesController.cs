@@ -18,7 +18,6 @@ namespace Web.Controllers
             _configuracion = configuracion;
         }
 
-        //[AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerCategorias");
@@ -60,7 +59,6 @@ namespace Web.Controllers
             return View(categories);
         }
 
-        [Authorize(Roles = "1")]
         public IActionResult Crear()
         {
             return View();
