@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Authorization.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Authorization.BW" Version="2.0.0" />
-    <PackageReference Include="Authorization.DA" Version="2.0.0" />
-    <PackageReference Include="Authorization.Middleware" Version="2.0.0" />
+    <PackageReference Include="Authorization.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Authorization.BW" Version="2.1.0" />
+    <PackageReference Include="Authorization.DA" Version="2.1.0" />
+    <PackageReference Include="Authorization.Middleware" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -19,6 +19,7 @@ namespace Web.Controllers
             _configuracion = configuracion;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             string endpoint = _configuracion.GetUrlMethod("ApiEndPoints", "ObtenerProductos");
